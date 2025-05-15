@@ -14,11 +14,8 @@ import modelo.enumeraciones.Especialidad;
  */
 public class EmpleadoDAO {
     
-    private Connection conexion=null;
 
-    public EmpleadoDAO() {
-        conexion= Conexion.getConexion();
-    }
+    public EmpleadoDAO() {}
     
     private Connection getConnection() throws SQLException {
     return Conexion.getConexion();
@@ -79,14 +76,12 @@ public class EmpleadoDAO {
     
     }catch(SQLException e){
             e.printStackTrace();}
-    
-    
     return empleados;
     }
     
     // Método para actualizar un empleado
     public void actualizarEmpleado(EmpleadoVO empleado) {
-        String sql = "UPDATE empleados SET nif= ?, telefono = ?, nombre = ?, apellidos = ?, calle = ?, numero = ?, localidad = ?, codigoPostal = ?, especialidad = ?, anosExperiencia = ?, titulacion = ? WHERE nif = ?";
+        String sql = "UPDATE empleado SET nif= ?, telefono = ?, nombre = ?, apellidos = ?, calle = ?, numero = ?, localidad = ?, codigoPostal = ?, especialidad = ?, anosExperiencia = ?, titulacion = ? WHERE nif = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -101,7 +96,6 @@ public class EmpleadoDAO {
             stmt.setInt(9, empleado.getAnosExperiencia());
             stmt.setString(10, empleado.getTitulacion());
             stmt.setString(11, empleado.getNif());
-
             stmt.executeUpdate();
             System.out.println("Empleado actualizado correctamente.");
         } catch (SQLException e) {
@@ -111,7 +105,7 @@ public class EmpleadoDAO {
 
     // Método para eliminar un empleado
     public void eliminarEmpleado(String nif) {
-        String sql = "DELETE FROM empleados WHERE nif = ?";
+        String sql = "DELETE FROM empleado WHERE nif = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -123,28 +117,41 @@ public class EmpleadoDAO {
         }
     }
     
-      public void insertarEmpleadoPrueba() {
-    String sql = "INSERT INTO empleado (nif, telefono, nombre, apellidos, calle, numero, localidad, codigoPostal, especialidad, anosExperiencia, titulacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setString(1, "12345678A");
-        stmt.setString(2, "987654321");
-        stmt.setString(3, "Prueba");
-        stmt.setString(4, "Test");
-        stmt.setString(5, "Calle Prueba");
-        stmt.setString(6, "123");
-        stmt.setString(7, "Ciudad Prueba");
-        stmt.setString(8, "12345");
-        stmt.setString(9, "ANALISTA"); //  Asegúrate de que esto coincida con un valor válido de tu enum
-        stmt.setInt(10, 5);
-        stmt.setString(11, "Grado Prueba");
+   //Método para buscar un empleado
+    
+    public EmpleadoVO buscar(String nif, String telefono) throws SQLException {
+        String sql = "SELECT * FROM empleado WHERE nif = ? OR telefono = ?";
+        try (Connection conexion = getConnection();
+            PreparedStatement ps = conexion.prepareStatement(sql)){
+            ps.setString(1, nif);
+            ps.setString(2, telefono);
+            try(ResultSet rs=ps.executeQuery()) {
+            
 
-        stmt.executeUpdate();
-        System.out.println("Inserción de prueba exitosa");
-    } catch (SQLException e) {
-        System.err.println("Error en la inserción de prueba");
-        e.printStackTrace();
+            if (rs.next()) {
+                return new EmpleadoVO(
+                rs.getString("nif"),
+                rs.getString("telefono"),
+                rs.getString("nombre"),
+                rs.getString("apellidos"),
+                rs.getString("calle"),
+                rs.getString("numero"),
+                rs.getString("localidad"),
+                rs.getString("codigoPostal"),
+                Especialidad.valueOf(rs.getString("especialidad")),
+                rs.getInt("anosExperiencia"),
+                rs.getString("titulacion")
+                
+                );
+            }
+        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
-}
+
+
 
 

@@ -26,6 +26,7 @@ public class ControladorPrincipal {
     private NuevoContrato nuevoContrato;
     private BuscarEmpleado buscarEmpleado;
     private ControladorNuevoEmpleado controladorNuevoEmpleado;
+    private ControladorBuscarEmpleado controladorBuscarEmpleado;
 
     
     public ControladorPrincipal(NuevoServicio nuevoServicio, NuevaPropuesta nuevaPropuesta, NuevoCliente nuevoCliente, Buscar buscar, NuevoEmpleado nuevoEmpleado, Principal principal, NuevoContrato nuevoContrato, BuscarEmpleado buscarEmpleado) {
@@ -43,7 +44,6 @@ public class ControladorPrincipal {
         configurarEventosNuevaPropuesta();
         configurarEventosNuevoProyecto();
         configurarEventosNuevoContrato();
-        configurarEventosBuscarTrabajador();
         configurarEventosBuscar();
     }
     
@@ -166,12 +166,7 @@ public class ControladorPrincipal {
         });
     }
     
-    public void configurarEventosBuscarTrabajador(){
-    buscarEmpleado.getjButtonSalir().addActionListener(l->{
-        principal.setVisible(true);
-        buscarEmpleado.setVisible(false);
-    });
-    }
+    
     
   
     

@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import controlador.ControladorBuscarEmpleado;
 import controlador.ControladorNuevoEmpleado;
 import controlador.ControladorPrincipal;
 import javax.swing.UIManager;
@@ -38,8 +39,10 @@ public class Main {
         BuscarEmpleado buscarEmpleado = new BuscarEmpleado();
         EmpleadoDAO empleadoDAO = new EmpleadoDAO();
         
-        ControladorPrincipal controlador = new ControladorPrincipal (nuevoServicio, nuevaPropuesta, nuevoCliente, buscar, nuevoEmpleado, ventanaPrincipal, nuevoContrato, buscarEmpleado);
-        ControladorNuevoEmpleado controladorNuevoEmpleado = new ControladorNuevoEmpleado(nuevoEmpleado, controlador);
+        
+        ControladorPrincipal controladorPrincipal = new ControladorPrincipal (nuevoServicio, nuevaPropuesta, nuevoCliente, buscar, nuevoEmpleado, ventanaPrincipal, nuevoContrato, buscarEmpleado);
+        ControladorNuevoEmpleado controladorNuevoEmpleado = new ControladorNuevoEmpleado(nuevoEmpleado, controladorPrincipal);
+        ControladorBuscarEmpleado controladorBuscarEmpleado = new ControladorBuscarEmpleado (buscarEmpleado, controladorPrincipal, empleadoDAO);
 
         
         

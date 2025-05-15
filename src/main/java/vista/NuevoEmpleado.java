@@ -303,7 +303,6 @@ public class NuevoEmpleado extends javax.swing.JFrame {
     }
 
     
-
     public void setjTextFieldLocalidad(JTextField jTextFieldLocalidad) {
         this.jTextFieldLocalidad = jTextFieldLocalidad;
     }
@@ -343,7 +342,6 @@ public class NuevoEmpleado extends javax.swing.JFrame {
     }
 
    
-
     public JTextField getjTextFieldLocalidad() {
         return jTextFieldLocalidad;
     }
@@ -374,18 +372,7 @@ public class NuevoEmpleado extends javax.swing.JFrame {
         this.jTextFieldTitulacion = jTextFieldTitulacion;
     }
 
-    /*public JOptionPane getjOptionPaneExito() {
-        return jOptionPaneExito;
-    }
-
-    public void setjOptionPaneExito(JOptionPane jOptionPaneExito) {
-        this.jOptionPaneExito = jOptionPaneExito;
-    }
-    
-    public void mostrarMensaje(String mensaje, String titulo, int tipoMensaje)throws SQLException{
-    jOptionPaneExito.showMessageDialog(this, mensaje, titulo, tipoMensaje);
-    
-    }*/
+   
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
